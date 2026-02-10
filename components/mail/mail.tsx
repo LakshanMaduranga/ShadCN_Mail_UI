@@ -88,7 +88,6 @@ function MailContent({
                 <ResizablePanel
                     defaultSize={20}     // default width in %
                     collapsedSize={10}   // width when collapsed
-
                     className={cn(
                         isCollapsed &&
                         "min-w-[500px] transition-all duration-300 ease-in-out"
