@@ -7,6 +7,7 @@ export type Mail = {
     date: string
     read: boolean
     labels: string[]
+    folder: string
 }
 
 export const mails: Mail[] = [
@@ -19,6 +20,7 @@ export const mails: Mail[] = [
         date: "2023-10-22T09:00:00",
         read: true,
         labels: ["meeting", "work", "important"],
+        folder: "Inbox",
     },
     {
         id: "110e8400-e29b-11d4-a716-446655440000",
@@ -29,6 +31,7 @@ export const mails: Mail[] = [
         date: "2023-10-22T10:30:00",
         read: true,
         labels: ["work", "important"],
+        folder: "Inbox"
     },
     {
         id: "3e7c3f6d-bdf5-46ae-8d90-171300f27ae2",
@@ -39,6 +42,7 @@ export const mails: Mail[] = [
         date: "2023-04-10T11:45:00",
         read: true,
         labels: ["personal"],
+        folder: "Inbox"
     },
     {
         id: "61c7a409-431e-461f-ce56-4192bff0e1e0",
@@ -49,6 +53,7 @@ export const mails: Mail[] = [
         date: "2023-03-25T13:15:00",
         read: false,
         labels: ["work", "budget"],
+        folder: "Drafts"
     },
     {
         id: "8f7b5db9-5471-4a6c-9219-00818b9cad0e",
@@ -59,5 +64,7 @@ export const mails: Mail[] = [
         date: "2023-03-10T15:00:00",
         read: false,
         labels: ["announcement"],
+        folder: "Trash"
     },
 ]
+

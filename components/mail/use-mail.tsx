@@ -6,6 +6,7 @@ import { Mail, mails } from "@/data/mails"
 
 type Config = {
     selected: Mail["id"] | null
+    selectedFolder: string
 }
 
 const MailContext = React.createContext<
@@ -13,10 +14,11 @@ const MailContext = React.createContext<
 >(null)
 
 export function MailProvider({ children }: { children: React.ReactNode }) {
-    // Initialize with the first mail if available
     const [config, setConfig] = React.useState<Config>({
         selected: mails[0]?.id || null,
+        selectedFolder: "Inbox",
     })
+
 
     return (
         <MailContext.Provider value={[config, setConfig]}>

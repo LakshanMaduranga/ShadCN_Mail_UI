@@ -11,6 +11,8 @@ import {
 
 interface NavProps {
     isCollapsed: boolean
+    activeFolder?: string
+    onSelect?: (title: string) => void
     links: {
         title: string
         label?: string
@@ -19,7 +21,8 @@ interface NavProps {
     }[]
 }
 
-export function Nav({ isCollapsed, links }: NavProps) {
+export function Nav({ isCollapsed, links, activeFolder, onSelect }: NavProps) {
+
     return (
         <div
             data-collapsed={isCollapsed}
@@ -32,10 +35,14 @@ export function Nav({ isCollapsed, links }: NavProps) {
                             <TooltipTrigger asChild>
                                 <Link
                                     href="#"
+                                    onClick={() => onSelect?.(link.title)}
                                     className={cn(
-                                        buttonVariants({ variant: link.variant, size: "icon" }),
+                                        buttonVariants({
+                                            variant: activeFolder === link.title ? "default" : "ghost",
+                                            size: "icon"
+                                        }),
                                         "h-9 w-9",
-                                        link.variant === "default" &&
+                                        activeFolder === link.title &&
                                         "dark:bg-muted dark:text-muted-foreground dark:hover:bg-muted dark:hover:text-white"
                                     )}
                                 >
@@ -56,9 +63,13 @@ export function Nav({ isCollapsed, links }: NavProps) {
                         <Link
                             key={index}
                             href="#"
+                            onClick={() => onSelect?.(link.title)}
                             className={cn(
-                                buttonVariants({ variant: link.variant, size: "sm" }),
-                                link.variant === "default" &&
+                                buttonVariants({
+                                    variant: activeFolder === link.title ? "default" : "ghost",
+                                    size: "sm"
+                                }),
+                                activeFolder === link.title &&
                                 "dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
                                 "justify-start"
                             )}

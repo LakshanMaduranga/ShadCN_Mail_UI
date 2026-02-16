@@ -11,6 +11,7 @@ import {
     PenBox,
     Search,
     Send,
+    Settings,
     ShoppingCart,
     Trash2,
     Users2,
@@ -30,6 +31,7 @@ import {
     TabsList,
     TabsTrigger,
 } from "@/components/ui/tabs"
+
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { AccountSwitcher } from "@/components/mail/account-switcher"
 import { MailDisplay } from "@/components/mail/mail-display"
@@ -93,98 +95,122 @@ function MailContent({
                         "min-w-[500px] transition-all duration-300 ease-in-out"
                     )}
                 >
-                    <div
-                        className={cn(
-                            "flex h-[52px] items-center justify-center",
-                            isCollapsed ? "h-[52px]" : "px-2"
-                        )}
-                    >
-                        <AccountSwitcher isCollapsed={isCollapsed} accounts={accounts} />
+                    <div className="flex flex-col h-full">
+                        <div className="flex-1">
+                            <div
+                                className={cn(
+                                    "flex h-[52px] items-center justify-center",
+                                    isCollapsed ? "h-[52px]" : "px-2"
+                                )}
+                            >
+                                <AccountSwitcher isCollapsed={isCollapsed} accounts={accounts} />
+                            </div>
+                            <Separator />
+                            <Nav
+                                isCollapsed={isCollapsed}
+                                activeFolder={mail.selectedFolder}
+                                onSelect={(folder) => setMail({ ...mail, selectedFolder: folder })}
+                                links={[
+                                    {
+                                        title: "Inbox",
+                                        label: "128",
+                                        icon: Inbox,
+                                        variant: "ghost",
+                                    },
+                                    {
+                                        title: "Drafts",
+                                        label: "9",
+                                        icon: File,
+                                        variant: "ghost",
+                                    },
+                                    {
+                                        title: "Sent",
+                                        label: "",
+                                        icon: Send,
+                                        variant: "ghost",
+                                    },
+                                    {
+                                        title: "Junk",
+                                        label: "23",
+                                        icon: ArchiveX,
+                                        variant: "ghost",
+                                    },
+                                    {
+                                        title: "Trash",
+                                        label: "",
+                                        icon: Trash2,
+                                        variant: "ghost",
+                                    },
+                                    {
+                                        title: "Archive",
+                                        label: "",
+                                        icon: Archive,
+                                        variant: "ghost",
+                                    },
+                                ]}
+                            />
+                            <Separator />
+                            <Nav
+                                isCollapsed={isCollapsed}
+                                activeFolder={mail.selectedFolder}
+                                onSelect={(folder) => setMail({ ...mail, selectedFolder: folder })}
+                                links={[
+                                    {
+                                        title: "Social",
+                                        label: "972",
+                                        icon: Users2,
+                                        variant: "ghost",
+                                    },
+                                    {
+                                        title: "Updates",
+                                        label: "342",
+                                        icon: AlertCircle,
+                                        variant: "ghost",
+                                    },
+                                    {
+                                        title: "Forums",
+                                        label: "128",
+                                        icon: MessagesSquare,
+                                        variant: "ghost",
+                                    },
+                                    {
+                                        title: "Shopping",
+                                        label: "8",
+                                        icon: ShoppingCart,
+                                        variant: "ghost",
+                                    },
+                                    {
+                                        title: "Promotions",
+                                        label: "21",
+                                        icon: Archive,
+                                        variant: "ghost",
+                                    },
+                                ]}
+                            />
+                        </div>
+                        <div className="mt-auto">
+                            <Separator />
+                            <Nav
+                                isCollapsed={isCollapsed}
+                                activeFolder={mail.selectedFolder}
+                                onSelect={(folder) => setMail({ ...mail, selectedFolder: folder })}
+                                links={[
+                                    {
+                                        title: "Settings",
+                                        label: "",
+                                        icon: Settings,
+                                        variant: "ghost",
+                                    },
+                                ]}
+                            />
+                        </div>
                     </div>
-                    <Separator />
-                    <Nav
-                        isCollapsed={isCollapsed}
-                        links={[
-                            {
-                                title: "Inbox",
-                                label: "128",
-                                icon: Inbox,
-                                variant: "default",
-                            },
-                            {
-                                title: "Drafts",
-                                label: "9",
-                                icon: File,
-                                variant: "ghost",
-                            },
-                            {
-                                title: "Sent",
-                                label: "",
-                                icon: Send,
-                                variant: "ghost",
-                            },
-                            {
-                                title: "Junk",
-                                label: "23",
-                                icon: ArchiveX,
-                                variant: "ghost",
-                            },
-                            {
-                                title: "Trash",
-                                label: "",
-                                icon: Trash2,
-                                variant: "ghost",
-                            },
-                            {
-                                title: "Archive",
-                                label: "",
-                                icon: Archive,
-                                variant: "ghost",
-                            },
-                        ]}
-                    />
-                    <Separator />
-                    <Nav
-                        isCollapsed={isCollapsed}
-                        links={[
-                            {
-                                title: "Social",
-                                label: "972",
-                                icon: Users2,
-                                variant: "ghost",
-                            },
-                            {
-                                title: "Updates",
-                                label: "342",
-                                icon: AlertCircle,
-                                variant: "ghost",
-                            },
-                            {
-                                title: "Forums",
-                                label: "128",
-                                icon: MessagesSquare,
-                                variant: "ghost",
-                            },
-                            {
-                                title: "Shopping",
-                                label: "8",
-                                icon: ShoppingCart,
-                                variant: "ghost",
-                            },
-                            {
-                                title: "Promotions",
-                                label: "21",
-                                icon: Archive,
-                                variant: "ghost",
-                            },
-                        ]}
-                    />
                 </ResizablePanel>
                 <ResizableHandle withHandle />
                 <ResizablePanel defaultSize={30} minSize={30}>
                     <Tabs defaultValue="all">
                         <div className="flex items-center px-4 py-2">
-                            <h1 className="text-xl font-bold">Inbox</h1>
+                            <h1 className="text-xl font-bold">{mail.selectedFolder}</h1>
                             <TabsList className="ml-auto">
                                 <TabsTrigger
                                     value="all"
@@ -210,10 +236,10 @@ function MailContent({
                             </form>
                         </div>
                         <TabsContent value="all" className="m-0">
-                            <MailList items={mails} />
+                            <MailList items={mails.filter(m => m.folder === mail.selectedFolder)} />
                         </TabsContent>
                         <TabsContent value="unread" className="m-0">
-                            <MailList items={mails.filter((item) => !item.read)} />
+                            <MailList items={mails.filter((item) => !item.read && item.folder === mail.selectedFolder)} />
                         </TabsContent>
                     </Tabs>
                 </ResizablePanel>
