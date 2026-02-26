@@ -200,6 +200,7 @@ function MailContent({
                                         label: "",
                                         icon: Settings,
                                         variant: "ghost",
+                                        href: "/dashboard/mailbox/settings",
                                     },
                                 ]}
                             />

@@ -1,5 +1,3 @@
-
-
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
@@ -11,13 +9,15 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 
+interface IAccount {
+    label: string
+    email: string
+    icon: React.ReactNode
+}
+
 interface AccountSwitcherProps {
     isCollapsed: boolean
-    accounts: {
-        label: string
-        email: string
-        icon: React.ReactNode
-    }[]
+    accounts: IAccount[]
 }
 
 export function AccountSwitcher({
