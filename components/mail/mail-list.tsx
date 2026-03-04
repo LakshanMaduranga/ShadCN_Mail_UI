@@ -1,5 +1,6 @@
 import { ComponentProps } from "react"
-import { formatDistanceToNow } from "date-fns"
+import { formatDistanceToNow, format } from "date-fns"
+import { Mail as MailIcon, Flag, Pin } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
@@ -22,7 +23,7 @@ export function MailList({ items }: MailListProps) {
                     <button
                         key={item.id}
                         className={cn(
-                            "flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
+                            "group flex flex-col items-start gap-2 rounded-lg border p-3 text-left text-sm transition-all hover:bg-accent",
                             mail.selected === item.id && "bg-muted"
                         )}
                         onClick={() =>
@@ -40,20 +41,25 @@ export function MailList({ items }: MailListProps) {
                                         <span className="flex h-2 w-2 rounded-full bg-blue-600" />
                                     )}
                                 </div>
+                                <div className="ml-auto flex items-center gap-2 opacity-0 transition-opacity group-hover:opacity-100">
+                                    <MailIcon className="h-3.5 w-3.5 text-muted-foreground" />
+                                    <Flag className="h-3.5 w-3.5 text-muted-foreground" />
+                                    <Pin className="h-3.5 w-3.5 text-muted-foreground" />
+                                </div>
+                            </div>
+                            <div className="flex items-center justify-between">
+                                <div className="text-xs font-medium">{item.subject}</div>
                                 <div
                                     className={cn(
-                                        "ml-auto text-xs",
+                                        "text-xs transition-all",
                                         mail.selected === item.id
                                             ? "text-foreground"
                                             : "text-muted-foreground"
                                     )}
                                 >
-                                    {formatDistanceToNow(new Date(item.date), {
-                                        addSuffix: true,
-                                    })}
+                                    {format(new Date(item.date), "MM/dd/yyyy")}
                                 </div>
                             </div>
-                            <div className="text-xs font-medium">{item.subject}</div>
                         </div>
                         <div className="line-clamp-2 text-xs text-muted-foreground">
                             {item.text.substring(0, 300)}
